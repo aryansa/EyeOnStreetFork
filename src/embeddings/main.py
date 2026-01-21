@@ -8,7 +8,7 @@ from torchvision import transforms
 from .embed_utils import seed_everything, load_labels_from_json, build_paths, save_embeddings
 from .dataset import ImageDataset
 from .create_embeddings import compute_embeddings
-from .dinov2_loader import load_dinov2
+from .dinov2_loader import load_vit_timm
 
 def main(args):
     seed_everything()
@@ -35,7 +35,7 @@ def main(args):
     all_paths = {split: build_paths(args.data_pth, labels_dict, split) for split in splits}
 
     # ---- Load model on GPU ----
-    model = load_dinov2(args.dino_pth, device)
+    model = load_vit_timm(args.dino_pth, device)
     model = model.to(device)
     model.eval()
 
